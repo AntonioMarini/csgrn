@@ -3,10 +3,8 @@
 
 #include <glm/glm.hpp>
 
-using namespace glm;
-
 struct Material {
-  vec3 albedo;
+  glm::vec3 albedo;
   float spec;
 };
 

@@ -3,9 +3,16 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <iostream>
+#include <vector>
 
+#include "glm/fwd.hpp"
+#include "material.hpp"
 #include "shader.hpp"
+#include "sphere.hpp"
 #include "compute_shader.hpp"
+
+const int LOCAL_SIZE_X = 8;
+const int LOCAL_SIZE_Y = 8;
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -51,6 +58,28 @@ int main() {
   // GET PARAMETERS TO CREATE WORKGROUPS LATER
   // ////
 
+  ComputeShader rayTracer("src/shaders/raytracer.glsl");
+
+  // define scene test objects
+  std::vector<Sphere> spheres;
+
+  Material mat;
+  mat.albedo = glm::vec3(1.0f, 1.0f, 1.0f);
+  mat.spec = 0.0f;
+
+  spheres.push_back({{.0f, .0f, -1.0f}, .5f, mat});
+
+  // create ssbo and populate it with scene
+  unsigned int ssbo;
+  glGenBuffers(1, &ssbo);
+  glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+
+  glBufferData(GL_SHADER_STORAGE_BUFFER, spheres.size() * sizeof(Sphere),
+               spheres.data(), GL_STATIC_DRAW);
+  glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, ssbo);
+
+  glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+
   // Create Texture for output
   unsigned int textureOut;
   glGenTextures(1, &textureOut);
@@ -92,8 +121,6 @@ int main() {
   baseShader.use();
   baseShader.setInt("screenTexture", 0);
 
-  ComputeShader rayTracer("src/shaders/raytracer.glsl");
-
   while (!glfwWindowShouldClose(window)) {
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -101,7 +128,7 @@ int main() {
 
     // Compute shader do its things very efficiently
     rayTracer.use();
-    glDispatchCompute(WIDTH, HEIGHT, 1);
+    glDispatchCompute(WIDTH / LOCAL_SIZE_X, HEIGHT / LOCAL_SIZE_Y, 1);
     glMemoryBarrier(
         GL_SHADER_IMAGE_ACCESS_BARRIER_BIT); // wait for compute shader to
                                              // finish writing on image
