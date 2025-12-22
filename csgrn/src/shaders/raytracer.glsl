@@ -28,7 +28,7 @@ struct HitRecord {
   Material material;
 };
 
-layout(std140, binding = 1) buffer SceneBuffer {
+layout(std140, binding = 1) buffer SceneBuffer { // todo: make this an heap of csg nodes
   Sphere sceneObjects[];
 };
 // Intersection functions
@@ -78,6 +78,9 @@ HitRecord hit_sphere(Ray r, Sphere s) {
 
 // Intersection funtions//
 
+// todo: pass light data through uniform or ssbo
+vec3 lightDir = normalize(vec3(-1.0, 1.0, 1.0));
+
 void main() {
   ivec2 pixel_coords = ivec2(gl_GlobalInvocationID.xy);
   ivec2 dims = imageSize(imgOutput);
@@ -94,14 +97,13 @@ void main() {
   r.origin = vec3(0.0, 0.0, 1.0);
   r.dir = normalize(vec3(uv.x, uv.y, -1.0));
 
-  Sphere sphere = sceneObjects[0];
+  Sphere sphere = sceneObjects[0]; // first -> root node (later will be the composition of all spans)
 
   HitRecord rec = hit_sphere(r, sphere);
 
   vec3 color = vec3(0.5, 0.7, 1.0); // background color
   if (rec.hit) {
     // if hit calculate light using normal
-    vec3 lightDir = normalize(vec3(-1.0, 1.0, 1.0));
     float lightIntensity = max(0.0, dot(rec.normal, lightDir));
     color = rec.material.albedo * lightIntensity;
   }

@@ -1,0 +1,9 @@
+union() {
+	multmatrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]) {
+		cylinder($fn = 30, $fa = 12, $fs = 2, h = 1, r1 = 1, r2 = 1, center = false);
+	}
+	multmatrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]) {
+		cylinder($fn = 30, $fa = 12, $fs = 2, h = 1, r1 = 1, r2 = 1, center = false);
+	}
+}
+

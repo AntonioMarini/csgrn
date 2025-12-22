@@ -1,4 +1,5 @@
 
+#include <X11/X.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -17,13 +18,22 @@ const int LOCAL_SIZE_Y = 8;
 const int WIDTH = 800;
 const int HEIGHT = 600;
 
+struct CSGContext {
+  int width;
+  int height;
+  GLFWwindow *window;
+};
+CSGContext ctx;
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
+  ctx.width = width;
+  ctx.height = height;
   glViewport(0, 0, width, height);
 }
 
 int main() {
 
-  // LOAD CSG MODEL
+  // LOAD AND PARSE CSG MODEL DATA
   // //////////////
 
   // INIT GLFW AND OpenGL Context
@@ -36,17 +46,20 @@ int main() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow *window =
-      glfwCreateWindow(WIDTH, HEIGHT, "csgrn", nullptr, nullptr);
-  if (!window) {
+  GLFWwindow *win = glfwCreateWindow(WIDTH, HEIGHT, "csgrn", nullptr, nullptr);
+  if (!win) {
     glfwTerminate();
     return -1;
   }
 
-  glfwMakeContextCurrent(window);
+  ctx.width = WIDTH;
+  ctx.height = HEIGHT;
+  ctx.window = win;
+
+  glfwMakeContextCurrent(ctx.window);
 
   // set screen callbvack
-  glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+  glfwSetFramebufferSizeCallback(ctx.window, framebuffer_size_callback);
 
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     std::cerr << "GLAD failed\n";
@@ -91,10 +104,11 @@ int main() {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-  glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, WIDTH, HEIGHT);
+  glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, ctx.width, ctx.height);
   glBindImageTexture(0, textureOut, 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA32F);
 
-  // quad setup
+  // QUAD VERTEX DATA
+  // todo: fix weird formatter behaviour onSave
   float quadVertices[] = {
       -1.0f, 1.0f, 0.0f, 0.0f,  1.0f, -1.0f, -1.0f, 0.0f,
       0.0f,  0.0f, 1.0f, -1.0f, 0.0f, 1.0f,  0.0f,
@@ -121,17 +135,17 @@ int main() {
   baseShader.use();
   baseShader.setInt("screenTexture", 0);
 
-  while (!glfwWindowShouldClose(window)) {
+  while (!glfwWindowShouldClose(ctx.window)) {
 
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-      glfwSetWindowShouldClose(window, true);
+    if (glfwGetKey(ctx.window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+      glfwSetWindowShouldClose(ctx.window, true);
 
-    // Compute shader do its things very efficiently
+    // "launch" the compute shader
     rayTracer.use();
-    glDispatchCompute(WIDTH / LOCAL_SIZE_X, HEIGHT / LOCAL_SIZE_Y, 1);
+    glDispatchCompute(ctx.width / LOCAL_SIZE_X, ctx.height / LOCAL_SIZE_Y, 1);
     glMemoryBarrier(
         GL_SHADER_IMAGE_ACCESS_BARRIER_BIT); // wait for compute shader to
-                                             // finish writing on image
+                                             // finish writing on the textureOut
 
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -141,14 +155,14 @@ int main() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureOut);
 
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, 6); // draw the quad with textureOut applied
 
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(ctx.window);
     glfwPollEvents();
   }
 
   glDeleteVertexArrays(1, &quadVAO);
   glDeleteBuffers(1, &quadVBO);
-  glfwDestroyWindow(window);
+  glfwDestroyWindow(ctx.window);
   glfwTerminate();
 }
