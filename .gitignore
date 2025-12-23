@@ -1,0 +1,7 @@
+build/
+CMakeCache.txt
+compile_commands.json
+cmake_install.cmake
+.clang-format
+Makefile
+.cache

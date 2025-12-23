@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/apollyon/Dev/csgrn/csgrn/cmake_install.cmake",
+		"/home/apollyon/Dev/csgrn/csgrn/vendor/glfw/cmake_install.cmake",
+		"/home/apollyon/Dev/csgrn/csgrn/vendor/glfw/src/cmake_install.cmake",
+		"/home/apollyon/Dev/csgrn/csgrn/vendor/glfw/docs/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
