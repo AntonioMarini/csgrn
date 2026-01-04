@@ -1,0 +1,30 @@
+union(){
+difference(){
+intersection(){
+    translate([-.5,-.5,-.5])
+        color("blue")
+        cube();
+    color("purple")
+    sphere(0.7);
+}
+union(){
+    
+    translate([0,0,-.5])
+        color([.5,0,.6])
+        cylinder(r=0.2,h=2);
+    union(){
+    rotate([-90,0,0])
+    translate([0,0,-.5])
+        color([.5,0,.6])
+        cylinder(r=0.2,h=2);
+        
+        rotate([0,-90,0])
+    translate([0,0,-.5])
+        color([.5,0,.6])
+        cylinder(r=0.2,h=2);
+    }
+}
+}
+color([0,0,0])
+    sphere(0.1);
+}

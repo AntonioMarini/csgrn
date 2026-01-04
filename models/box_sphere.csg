@@ -1,0 +1,20 @@
+union() {
+	color([0.2, 0.5, 1, 1]) {
+		difference() {
+			cube(size = [2, 2, 2], center = true);
+			union() {
+				cylinder($fn = 0, $fa = 12, $fs = 2, h = 2.5, r1 = 0.85, r2 = 0.85, center = true);
+				multmatrix([[0, 0, 1, 0], [0, 1, 0, 0], [-1, 0, 0, 0], [0, 0, 0, 1]]) {
+					cylinder($fn = 0, $fa = 12, $fs = 2, h = 2.5, r1 = 0.85, r2 = 0.85, center = true);
+				}
+				multmatrix([[1, 0, 0, 0], [0, 0, -1, 0], [0, 1, 0, 0], [0, 0, 0, 1]]) {
+					cylinder($fn = 0, $fa = 12, $fs = 2, h = 2.5, r1 = 0.85, r2 = 0.85, center = true);
+				}
+			}
+		}
+	}
+	color([1, 0.2, 0.2, 1]) {
+		sphere($fn = 0, $fa = 12, $fs = 2, r = 0.6);
+	}
+}
+

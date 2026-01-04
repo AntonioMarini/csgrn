@@ -1,0 +1,12 @@
+union(){
+    color("cyan")
+    translate([1,0,0])
+        sphere();
+    union(){
+      color([0,1,0])
+      translate([0.5,0,1])  
+        sphere();
+      color("pink")
+        sphere();
+    }
+}
