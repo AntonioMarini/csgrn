@@ -89,6 +89,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/csgrn.dir/DependInfo.cmake"
+  "CMakeFiles/imgui.dir/DependInfo.cmake"
   "vendor/glfw/CMakeFiles/uninstall.dir/DependInfo.cmake"
   "vendor/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "vendor/glfw/src/CMakeFiles/update_mappings.dir/DependInfo.cmake"

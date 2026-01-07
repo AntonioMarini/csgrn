@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/apollyon/Dev/csgrn/csgrn
+CMAKE_SOURCE_DIR = /home/apollyon/Dev/csgrn
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/apollyon/Dev/csgrn/csgrn
+CMAKE_BINARY_DIR = /home/apollyon/Dev/csgrn
 
 # Include any dependencies generated for this target.
 include CMakeFiles/csgrn.dir/depend.make
@@ -75,30 +75,30 @@ CMakeFiles/csgrn.dir/codegen:
 CMakeFiles/csgrn.dir/src/main.cpp.o: CMakeFiles/csgrn.dir/flags.make
 CMakeFiles/csgrn.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/csgrn.dir/src/main.cpp.o: CMakeFiles/csgrn.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/apollyon/Dev/csgrn/csgrn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/csgrn.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/csgrn.dir/src/main.cpp.o -MF CMakeFiles/csgrn.dir/src/main.cpp.o.d -o CMakeFiles/csgrn.dir/src/main.cpp.o -c /home/apollyon/Dev/csgrn/csgrn/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/apollyon/Dev/csgrn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/csgrn.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/csgrn.dir/src/main.cpp.o -MF CMakeFiles/csgrn.dir/src/main.cpp.o.d -o CMakeFiles/csgrn.dir/src/main.cpp.o -c /home/apollyon/Dev/csgrn/src/main.cpp
 
 CMakeFiles/csgrn.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/csgrn.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/apollyon/Dev/csgrn/csgrn/src/main.cpp > CMakeFiles/csgrn.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/apollyon/Dev/csgrn/src/main.cpp > CMakeFiles/csgrn.dir/src/main.cpp.i
 
 CMakeFiles/csgrn.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/csgrn.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/apollyon/Dev/csgrn/csgrn/src/main.cpp -o CMakeFiles/csgrn.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/apollyon/Dev/csgrn/src/main.cpp -o CMakeFiles/csgrn.dir/src/main.cpp.s
 
 CMakeFiles/csgrn.dir/src/glad.c.o: CMakeFiles/csgrn.dir/flags.make
 CMakeFiles/csgrn.dir/src/glad.c.o: src/glad.c
 CMakeFiles/csgrn.dir/src/glad.c.o: CMakeFiles/csgrn.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/apollyon/Dev/csgrn/csgrn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/csgrn.dir/src/glad.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/csgrn.dir/src/glad.c.o -MF CMakeFiles/csgrn.dir/src/glad.c.o.d -o CMakeFiles/csgrn.dir/src/glad.c.o -c /home/apollyon/Dev/csgrn/csgrn/src/glad.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/apollyon/Dev/csgrn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/csgrn.dir/src/glad.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/csgrn.dir/src/glad.c.o -MF CMakeFiles/csgrn.dir/src/glad.c.o.d -o CMakeFiles/csgrn.dir/src/glad.c.o -c /home/apollyon/Dev/csgrn/src/glad.c
 
 CMakeFiles/csgrn.dir/src/glad.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/csgrn.dir/src/glad.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/apollyon/Dev/csgrn/csgrn/src/glad.c > CMakeFiles/csgrn.dir/src/glad.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/apollyon/Dev/csgrn/src/glad.c > CMakeFiles/csgrn.dir/src/glad.c.i
 
 CMakeFiles/csgrn.dir/src/glad.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/csgrn.dir/src/glad.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/apollyon/Dev/csgrn/csgrn/src/glad.c -o CMakeFiles/csgrn.dir/src/glad.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/apollyon/Dev/csgrn/src/glad.c -o CMakeFiles/csgrn.dir/src/glad.c.s
 
 # Object files for target csgrn
 csgrn_OBJECTS = \
@@ -113,12 +113,14 @@ csgrn: CMakeFiles/csgrn.dir/src/glad.c.o
 csgrn: CMakeFiles/csgrn.dir/build.make
 csgrn: CMakeFiles/csgrn.dir/compiler_depend.ts
 csgrn: vendor/glfw/src/libglfw3.a
+csgrn: libimgui.a
+csgrn: vendor/glfw/src/libglfw3.a
 csgrn: /usr/lib/librt.a
 csgrn: /usr/lib/libm.so
 csgrn: /usr/lib/libGLX.so
 csgrn: /usr/lib/libOpenGL.so
 csgrn: CMakeFiles/csgrn.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/apollyon/Dev/csgrn/csgrn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable csgrn"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/apollyon/Dev/csgrn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable csgrn"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/csgrn.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -130,6 +132,6 @@ CMakeFiles/csgrn.dir/clean:
 .PHONY : CMakeFiles/csgrn.dir/clean
 
 CMakeFiles/csgrn.dir/depend:
-	cd /home/apollyon/Dev/csgrn/csgrn && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/apollyon/Dev/csgrn/csgrn /home/apollyon/Dev/csgrn/csgrn /home/apollyon/Dev/csgrn/csgrn /home/apollyon/Dev/csgrn/csgrn /home/apollyon/Dev/csgrn/csgrn/CMakeFiles/csgrn.dir/DependInfo.cmake "--color=$(COLOR)" csgrn
+	cd /home/apollyon/Dev/csgrn && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/apollyon/Dev/csgrn /home/apollyon/Dev/csgrn /home/apollyon/Dev/csgrn /home/apollyon/Dev/csgrn /home/apollyon/Dev/csgrn/CMakeFiles/csgrn.dir/DependInfo.cmake "--color=$(COLOR)" csgrn
 .PHONY : CMakeFiles/csgrn.dir/depend
 

@@ -11,6 +11,10 @@ enum Directions {
     LEFT,
     RIGHT,
     UP,
+    ROT_UP,
+    ROT_DOWN,
+    ROT_LEFT,
+    ROT_RIGHT,
     DOWN
 };
 
@@ -18,6 +22,7 @@ enum Directions {
 const float YAW         = -90.0f;
 const float PITCH       =  0.0f;
 const float SPEED       =  2.5f;
+const float ROT_SPEED = 3.0f;
 const float SENSITIVITY =  0.1f;
 const float ZOOM        =  45.0f;
 
@@ -34,10 +39,11 @@ public:
     float pitch;
   
     float speed;
+    float rot_speed;
     float sensitivity;
     float zoom;
 
-    camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f,1.0, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec3(0.0f, 0.0f, -1.0f)), speed(SPEED), sensitivity(SENSITIVITY), zoom(ZOOM)
+    camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f,1.0, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec3(0.0f, 0.0f, -1.0f)), speed(SPEED), sensitivity(SENSITIVITY), zoom(ZOOM), rot_speed(ROT_SPEED)
     {
         this->position = position;
         world_up = up;
@@ -66,6 +72,28 @@ public:
             position += world_up * velocity;
         if  (direction == DOWN)
             position += -world_up * velocity;
+        if (direction == ROT_UP){
+            pitch += ROT_SPEED;
+    }
+        if (direction == ROT_DOWN) {
+            pitch -= ROT_SPEED;
+        }
+        if(direction == ROT_LEFT) {
+            yaw -= ROT_SPEED;
+        }
+        if (direction == ROT_RIGHT) {
+            yaw += ROT_SPEED;
+        }
+
+
+
+         if (pitch > 89.0f)
+                pitch = 89.0f;
+            if (pitch < -89.0f)
+                pitch = -89.0f;
+
+        update_vectors();
+
     }
 
     void process_input_mouse(float xoffset, float yoffset, GLboolean constrain_pitch = true)

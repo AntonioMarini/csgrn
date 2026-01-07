@@ -9,7 +9,7 @@ difference() {
 			}
 		}
 	}
-	color([-1, -1, -1, 1]) {
+	color([0, 1, 0, 1]) {
 		union() {
 			union() {
 				multmatrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, -1], [0, 0, 0, 1]]) {
@@ -29,5 +29,4 @@ difference() {
 		}
 	}
 }
-sphere($fn = 50, $fa = 12, $fs = 2, r = 0.2);
 

@@ -1,0 +1,5 @@
+union() {
+	cube(size = [1, 1, 1], center = false);
+	cylinder($fn = 0, $fa = 12, $fs = 2, h = 1, r1 = 0.3, r2 = 0.3, center = false);
+}
+

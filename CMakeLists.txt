@@ -22,4 +22,29 @@ add_subdirectory(vendor/glfw)
 
 find_package(OpenGL REQUIRED)
 
-target_link_libraries(csgrn PRIVATE csgrn_lib glfw OpenGL::GL)
+find_package(X11 REQUIRED)
+
+# --- ImGui Configuration ---
+set(IMGUI_DIR vendor/imgui)
+
+# Create a static library for ImGui
+add_library(imgui STATIC
+    ${IMGUI_DIR}/imgui.cpp
+    ${IMGUI_DIR}/imgui_demo.cpp
+    ${IMGUI_DIR}/imgui_draw.cpp
+    ${IMGUI_DIR}/imgui_tables.cpp
+    ${IMGUI_DIR}/imgui_widgets.cpp
+    ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
+    ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+)
+
+# Allow targets linking 'imgui' to see the headers
+target_include_directories(imgui PUBLIC 
+    ${IMGUI_DIR} 
+    ${IMGUI_DIR}/backends
+)
+
+# ImGui backends rely on GLFW and OpenGL
+target_link_libraries(imgui PRIVATE glfw OpenGL::GL X11)
+
+target_link_libraries(csgrn PRIVATE csgrn_lib glfw OpenGL::GL imgui)

@@ -44,10 +44,12 @@ public:
 class csg_parser {
     std::vector<std::string> tokens;
     size_t pos = 0;
+    std::vector<glm::vec3> color_stack;
 
 public:
     csg_parser(const std::string& input) {
         tokens = lexer::tokenize(input);
+        color_stack.push_back(glm::vec3(0.8f, 0.8f, 0.8f));
     }
 
     csg_node* parse() {
@@ -180,7 +182,9 @@ private:
         expect(")"); 
         expect("{");
 
+        color_stack.push_back(glm::vec3(r, g, b));
         csg_node* child = parse_exp();
+        color_stack.pop_back();
         
         if (!child) {
             std::cerr << "[CRITICAL ERROR] color child is NULL. Cannot apply color." << std::endl;
@@ -190,12 +194,12 @@ private:
         if(peek() == ";") consume();
         expect("}");
 
-        child->color = glm::vec3(r, g, b);
         return child;
     }
 
     csg_node* parse_sphere() {
         csg_node* node = new csg_node(primitive_types::sphere);
+        node->color = color_stack.back();
         float radius = 1.0f; // Default radius
 
         expect("(");
@@ -234,6 +238,7 @@ private:
 csg_node* parse_cube() {
         std::cout << "[DEBUG] Parsing Cube" << std::endl;
         csg_node* node = new csg_node(primitive_types::cube); 
+        node->color = color_stack.back(); 
         
         glm::vec3 size(1.0f);
         bool center = true;  
@@ -283,6 +288,7 @@ csg_node* parse_cube() {
 
 csg_node* parse_cylinder() {
         csg_node* node = new csg_node(primitive_types::cylinder); 
+        node->color = color_stack.back(); 
         
         float h = 1.0f;       // Default height
         float r1 = 1.0f;

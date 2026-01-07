@@ -5,13 +5,13 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/home/apollyon/Dev/csgrn/csgrn/include -I/home/apollyon/Dev/csgrn/csgrn/vendor/glfw/include
+C_INCLUDES = -I/home/apollyon/Dev/csgrn/include -I/home/apollyon/Dev/csgrn/vendor/glfw/include -I/home/apollyon/Dev/csgrn/vendor/imgui -I/home/apollyon/Dev/csgrn/vendor/imgui/backends
 
 C_FLAGS = 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/apollyon/Dev/csgrn/csgrn/include -I/home/apollyon/Dev/csgrn/csgrn/vendor/glfw/include
+CXX_INCLUDES = -I/home/apollyon/Dev/csgrn/include -I/home/apollyon/Dev/csgrn/vendor/glfw/include -I/home/apollyon/Dev/csgrn/vendor/imgui -I/home/apollyon/Dev/csgrn/vendor/imgui/backends
 
 CXX_FLAGS = -std=gnu++20
 

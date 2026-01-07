@@ -27,6 +27,7 @@ uniform int u_rendering_mode;
 uniform vec3 u_camera_pos;
 uniform mat4 u_inv_view;
 
+// Light Uniforms
 uniform vec3 u_light_dir;
 
 struct material {
@@ -419,7 +420,7 @@ ray_march_hr sdf_merge(ray_march_hr right, ray_march_hr left, uint op){
      
      if(neg_right_d > left.d){ 
          right.d = neg_right_d; // use negated distance
-         //right.p_id = left.p_id; // with the left primitive data to show the correct material.
+        // right.p_id = left.p_id; // with the left primitive data to show the correct material.
          right.invert_normal = !right.invert_normal; // invert the normal from the previous primitive
          return right;
      }
@@ -514,7 +515,7 @@ vec3 csg_raymarch(ray r){
   bool hit = false;
   
   ray_march_hr hr;
-  for(int i = 0; i < 256; i++){
+  for(int i = 0; i < 128; i++){
     vec3 p = r.origin + t * r.dir;
     hr = mapSDF(p); // get the final hit
     float d = hr.d;
@@ -531,11 +532,11 @@ vec3 csg_raymarch(ray r){
   }
 
 if(hit) {
-  primitive prim = primitives[hr.p_id];
-  vec3 hit_color = prim.material.albedo.xyz;
-      float val = clamp(1.0 - (t / 10.0), 0.0, 1.0); 
-       vec3 world_hp = r.origin + r.dir * t;
-  color = mix(vec3(1.0),get_final_color(world_hp, light_dir, prim, hr.invert_normal),val);
+    primitive prim = primitives[instructions[hr.p_id].id];
+    float val = clamp(1.0 - (t / 20.0), 0.0, 1.0);
+    vec3 world_hp = r.origin + r.dir * t;
+    vec3 shaded_color = get_final_color(world_hp, light_dir, prim, hr.invert_normal);
+    color = mix(BACKGROUND, shaded_color, val);
 }
 
   return color;
@@ -553,7 +554,7 @@ void main() {
 
   // multi sampling for anti aliasing
   vec3 average_color; 
-  int samples = 3;
+  int samples = 4;
   for(int s = 0; s<samples; s++){
     vec2 jitter = vec2(
             hash(vec2(pixel_coords) + float(s) * 1.0),

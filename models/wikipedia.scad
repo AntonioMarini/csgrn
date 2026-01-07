@@ -11,7 +11,7 @@ translate([-0.5,-0.5,-0.5]){
 cube(1);
 }
 }
-color("brightgreen",1.0)
+color([0.0, 1.0, 0.0])
 union(){
 
 union(){

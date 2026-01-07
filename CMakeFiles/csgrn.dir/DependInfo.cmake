@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/apollyon/Dev/csgrn/csgrn/src/glad.c" "CMakeFiles/csgrn.dir/src/glad.c.o" "gcc" "CMakeFiles/csgrn.dir/src/glad.c.o.d"
-  "/home/apollyon/Dev/csgrn/csgrn/src/main.cpp" "CMakeFiles/csgrn.dir/src/main.cpp.o" "gcc" "CMakeFiles/csgrn.dir/src/main.cpp.o.d"
+  "/home/apollyon/Dev/csgrn/src/glad.c" "CMakeFiles/csgrn.dir/src/glad.c.o" "gcc" "CMakeFiles/csgrn.dir/src/glad.c.o.d"
+  "/home/apollyon/Dev/csgrn/src/main.cpp" "CMakeFiles/csgrn.dir/src/main.cpp.o" "gcc" "CMakeFiles/csgrn.dir/src/main.cpp.o.d"
   "" "csgrn" "gcc" "CMakeFiles/csgrn.dir/link.d"
   )
 
